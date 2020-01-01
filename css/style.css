@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+html {
+    height: 100%;
+}
+
+* {
+    font-family: 'Press Start 2P', sans-serif;
+}
+
+body {
+    background-color: #fed32a;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    padding: 10px;
+    position: absolute;
+}
+
+nav a {
+    color: #f77c00;
+}
+
+.hide {
+    display: none;
+}
+
+/*
+ * start
+ */
+
+#start {
+    align-self: center;
+
+    width: 300px;
+    height: 100px;
+
+    background-color: #f77c00;
+    border-radius: 1em;
+    box-shadow: 0px 4px 0px 3px #000;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+#start:hover {
+    background-color: cyan;
+}
+
+#start:active {
+    margin-top: 10px;
+}
+
+#start:hover span {
+    color: #000;
+    text-shadow: 4px 4px 0px #fff;
+}
+
+#start span {
+    color: white;
+    text-align: center;
+    align-self: center;
+    text-shadow: 4px 4px 0px #000;
+    font-size: 2.6em;
+    animation: blink 1s steps(4, start) infinite;
+}
+
+/*
+* session form
+*/
+
+#session-form {
+    color: #fff;
+    align-self: center;
+    width: 500px;
+    height: 300px;
+    border-radius: 1em;
+    background: #140d28;
+}
+
+#session-form h2 {
+    font-size: 2em;
+    text-align: center;
+    margin: 60px 0 0;
+}
+
+#session-form h3 {
+    font-size: 0.8em;
+    text-align: center;
+    animation: blink 1s steps(4, start) infinite;
+}
+
+#session-form .form-group {
+    margin: 30px 0 0;
+}
+
+input[type="text"] {
+    width: 100%;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.hint {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+/*
+* game
+*/
+
+#canvas {
+    margin: 0 auto;
+    display: inherit;
+}
+
+#wheel{
+    align-self: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#wheel:after{
+    content: "";
+    border: 2px solid white;
+    position: absolute;
+    top: -17px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
+    transform: rotate(45deg);
+    background: #140d28;
+}
+
+/*
+* animations
+*/
+
+@keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
