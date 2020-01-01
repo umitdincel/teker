@@ -53,6 +53,7 @@ nav a {
 
 #start:active {
     margin-top: 10px;
+    box-shadow: 0px 2px 0px 3px #000;
 }
 
 #start:hover span {
