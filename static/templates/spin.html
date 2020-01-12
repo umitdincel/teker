@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Teker | spin and win</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>TEKER{{ title }}</h1>
+    <h2>spin and win</h2>
+  </header>
+
+  <div id="room">
+    <h2>session id: <span>#0AJ2t5n8</span></h2>
+    <h3>remaining time: <span id="timer">01:00</span> minutes</h3>
+    <button><span>join session</span></button>
+    <ul>
+      <li>umit.dincel <span>+10</span></li>
+      <li>akif.kahraman<span>+10</span></li>
+      <li>hasancan.yildir<span>+10</span></li>
+      <li>selim.sevencan<span>+10</span></li>
+      <li>davut.sala<span>+10</span></li>
+    </ul>
+    <h3>total player: <span>5</span></h3>
+    <h3>total bonus: <span>+50</span></h3>
+  </div>
+
+  <div id="wheel">
+    <canvas id="canvas" width="500" height="500"></canvas>
+  </div>
+
+  <script type="text/javascript" src="/static/js/utils.js"></script>
+  <script type="text/javascript" src="/static/js/awheel.js"></script>
+  <script type="text/javascript" src="/static/js/Timer.js"></script>
+  <script type="text/javascript">
+    new Timer(
+      document.querySelector('#timer')
+    ).start(60);
+  </script>
+</body>
+</html>

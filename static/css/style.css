@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P&display=swap');
+
+html {
+    height: 100%;
+}
+
+* {
+    font-family: 'Press Start 2P', sans-serif;
+}
+
+body {
+    position: relative;
+    background-color: #fed32a;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    padding: 10px;
+    position: absolute;
+}
+
+nav a {
+    color: #f77c00;
+}
+
+.hide {
+    display: none;
+}
+
+button {
+    background-color: #f77c00;
+    border-radius: 1em;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+}
+
+button:hover {
+    background-color: cyan;
+}
+
+button:active {
+    margin-top: 10px;
+}
+
+button span {
+    color: white;
+    text-align: center;
+    align-self: center;
+}
+
+button:hover span {
+    color: #000;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+header {
+    left: 50%;
+    top: 20px;
+    width: 400px;
+    margin-left: -200px;
+    text-align: center;
+    position: absolute;
+}
+
+header h1 {
+    font-size: 2.4em;
+    margin-bottom: 0;
+}
+
+header h2 {
+    color: #f77c00;
+    margin-top: 5px;
+    font-size: 1.2em;
+    animation: blink 1s steps(4, start) infinite;
+}
+
+/*
+ * start
+ */
+
+.start-session-form {
+    align-self: center;
+}
+
+.start-session-form button {
+    width: 300px;
+    height: 100px;
+    box-shadow: 0px 4px 0px 3px #000;
+}
+
+.start-session-form button:active {
+    box-shadow: 0px 2px 0px 3px #000;
+}
+
+.start-session-form button span {
+    text-shadow: 4px 4px 0px #000;
+    font-size: 2.6em;
+    animation: blink 1s steps(4, start) infinite;
+}
+
+.start-session-form button:hover span {
+    text-shadow: 4px 4px 0px #fff;
+}
+
+/*
+* session form
+*/
+
+#session-form {
+    color: #fff;
+    align-self: center;
+    width: 500px;
+    border-radius: 1em;
+    background: #140d28;
+    padding: 40px 20px;
+}
+
+#session-form h2 {
+    font-size: 2em;
+    text-align: center;
+}
+
+#session-form h3 {
+    font-size: 0.8em;
+    text-align: center;
+    animation: blink 1s steps(4, start) infinite;
+}
+
+#session-form .form-group {
+    margin: 30px 0 0;
+}
+
+#session-form .form-group input[type="text"] {
+    width: 90%;
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    display: block;
+    margin: 0 auto;
+}
+
+#session-form .form-group button {
+    width: 100px;
+    height: 30px;
+    font-size: 0.4em;
+    display: block;
+    margin: 20px auto 0;
+    box-shadow: 0px 1px 0px 1px #fff;
+}
+
+#session-form .form-group button:active {
+    box-shadow: 0px 0px 0px 1px #fff;
+}
+
+#session-form .form-group button span {
+    text-shadow: 1px 1px 0px #000;
+}
+
+#session-form .form-group button:hover span {
+    text-shadow: 1px 1px 0px #fff;
+}
+
+/*
+* room
+*/
+
+#room {
+    margin-top: 50px;
+    color: #fff;
+    align-self: center;
+    width: 500px;
+    border-radius: 1em;
+    background: #140d28;
+    padding: 40px 20px;
+    max-height: 500px;
+    overflow-y: scroll;
+    box-sizing: border-box;
+    margin-right: 50px;
+}
+
+#room ul {
+    padding: 0;
+    margin: 30px 0 50px;
+    list-style-type: none;
+}
+
+#room ul li {
+    position: relative;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+#room ul li span {
+    float: right;
+    color: cyan;
+}
+
+#room ul li:after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(to right, transparent 50%, cyan 50%);
+    background-size: 20px 100%;
+}
+
+#room h2 {
+    font-size: 1em;
+}
+
+#room h2 span {
+    color: cyan;
+}
+
+#room h3 {
+    font-size: 0.8em;
+    line-height: 1.6em;
+}
+
+#room h3 span {
+    color: cyan;
+}
+
+#room button {
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    box-shadow: 0px 1px 0px 1px #fff;
+}
+
+#room button:active {
+    box-shadow: 0px 0px 0px 1px #fff;
+}
+
+#room button span {
+    text-shadow: 1px 1px 0px #000;
+}
+
+#room button:hover span {
+    text-shadow: 1px 1px 0px #fff;
+}
+
+/*
+* game
+*/
+
+#canvas {
+    margin: 0 auto;
+    display: inherit;
+}
+
+#wheel {
+    margin-top: 50px;
+    align-self: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#wheel:after {
+    content: "";
+    border: 2px solid white;
+    position: absolute;
+    top: -17px;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-left: -15px;
+    transform: rotate(45deg);
+    background: #140d28;
+}
+
+/*
+* animations
+*/
+
+@keyframes blink {
+    to {
+        visibility: hidden;
+    }
+}
