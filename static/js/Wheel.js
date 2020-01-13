@@ -3,7 +3,7 @@ function Wheel(players = []){
   this.width = canvas.width;
   this.center = canvas.width/2;
 
-  this.deg = rand(0, 360);
+  this.deg = 0;
   this.speed = 0.1;
   this.maxSpeed = 3;
   this.slowDownRand = 0;
@@ -15,7 +15,7 @@ function Wheel(players = []){
   this.slices = 0;
   this.sliceDeg = 0;
 
-  this.slowDownRand = rand(0.994, 0.998);
+  this.slowDownRand = 0.994458;
   this.momentum = 1;
 }
 
@@ -73,7 +73,7 @@ Wheel.prototype.drawWheel = function() {
   }
 }
 
-Wheel.prototype.setPlayer = function(players) {
+Wheel.prototype.setPlayer = function(players, remaining_time) {
   var that = this.players;
 
   var isSubset = players.every(function(val) {
@@ -82,8 +82,21 @@ Wheel.prototype.setPlayer = function(players) {
 
   if(!isSubset) {
     this.updatePlayers(players);
-    this.spin();
+
+    if(remaining_time > 5) {
+      this.spin();
+    } else {
+      this.drawWheel();
+      document.querySelector('#wheel').classList.add('finish');
+    }
   }
+}
+
+Wheel.prototype.displayWinner = function(winner) {
+  var winnerEl = document.querySelector('.winner');
+  
+  winnerEl.innerText = winner;
+  winnerEl.classList.remove('hide');
 }
 
 Wheel.prototype.spin = function(isActiveAnimation) {
@@ -110,8 +123,9 @@ Wheel.prototype.spin = function(isActiveAnimation) {
   if(this.lock && !this.speed) {
     var winner = Math.floor(((360 - this.deg - 90) % 360) / this.sliceDeg);
     winner = (this.slices+winner) % this.slices;
-
-    // this.players[winner]
+    
+    this.winner = this.players[winner];
+    this.displayWinner(this.winner);
   }
 }
 

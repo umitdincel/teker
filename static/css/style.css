@@ -283,6 +283,10 @@ header h2 {
     overflow: hidden;
 }
 
+#wheel.finish:after {
+    display: none;
+}
+
 #wheel:after {
     content: "";
     border: 2px solid white;
@@ -296,6 +300,35 @@ header h2 {
     background: #140d28;
 }
 
+#wheel .winner {
+    position: absolute;
+    width: 400px;
+    height: 100px;
+    line-height: 100px;
+    left: 50px;
+    top: 190px;
+    text-align: center;
+    border: 8px solid #140d28;
+    transform: rotate(-15deg) scale(1);
+    background: #f77c00;
+    animation-fill-mode:forwards;
+    animation-name: pulse;
+    animation-delay:0.5s;
+    animation-duration: 0.5s;
+    opacity: 0;
+}
+
+#wheel .winner:after {
+    content: "";
+    border: 4px solid #140d28;
+    width: 90%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    height: 75px;
+    background: transparent;
+}
+
 /*
 * animations
 */
@@ -304,4 +337,20 @@ header h2 {
     to {
         visibility: hidden;
     }
+}
+
+@keyframes pulse{
+  0%{
+    opacity: 0;
+  }
+  10%{
+    opacity:.50;
+    transform-origin: 50% 50%;
+    transform: rotate(-2deg) scale(5);
+    transition: all .3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+  }
+  100%{
+    opacity:1;
+    transform: rotate(-15deg) scale(1);
+  }
 }
