@@ -5,7 +5,6 @@ import requests
 
 class Bonusly(object):
     API = 'https://bonus.ly/api/v1/'
-    TEST_TOKEN = 'a0737099c2203ecfce10555e78eeec26'
 
     def __init__(self, token):
         self.token = token

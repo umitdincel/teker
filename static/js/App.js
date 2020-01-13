@@ -22,7 +22,6 @@ ws.onmessage = function (event) {
     document.querySelector('#room .remaining-info').innerText = 'session is over';
     document.getElementById("join-session-btn").disabled = true;
   }
-
   room.update(data.players);
   wheel.setPlayer(data.players, data.remaining_time);
 };
