@@ -1,19 +1,27 @@
-var ws = new WebSocket('ws://' + document.domain + ':' + 4000 + '/feed'),
-    messages = document.createElement('ul');
+// websocket host configuration
+var host = document.domain + ':' + location.port;
+var route = '/spin/' + sessionID;
+var ws = new WebSocket('ws://' + host + route);
+
+var room = new Room(document.querySelector('#player-list'));
+var wheel = new Wheel();
+
 ws.onmessage = function (event) {
-    var messages = document.getElementsByTagName('ul')[0],
-        message = document.createElement('li'),
-        content = document.createTextNode('Received: ' + event.data);
-    message.appendChild(content);
-    messages.appendChild(message);
+  data = JSON.parse(event.data)
+
+  if(data.remaining_time > 0) {
+    new Timer(
+      document.querySelector('#timer')
+    ).set(data.remaining_time);
+
+    if(data.remaining_time < 5) {
+        wheel.slow();
+        document.getElementById("join-session-btn").disabled = true;
+    }
+
+    room.update(data.players);
+    wheel.setPlayer(data.players);
+  } else {
+    document.querySelector('#room .remaining-info').innerText = 'session is over';
+  }
 };
-document.body.appendChild(messages);
-window.setInterval(function() {
-    data = 'bye!'
-    ws.send(data);
-    var messages = document.getElementsByTagName('ul')[0],
-        message = document.createElement('li'),
-        content = document.createTextNode('Sent: ' + data);
-    message.appendChild(content);
-    messages.appendChild(message);
-}, 1000);

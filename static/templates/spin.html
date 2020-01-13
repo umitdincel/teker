@@ -8,23 +8,26 @@
 <body>
 
   <header>
-    <h1>TEKER{{ title }}</h1>
+    <h1>TEKER</h1>
     <h2>spin and win</h2>
   </header>
 
   <div id="room">
-    <h2>session id: <span>#0AJ2t5n8</span></h2>
-    <h3>remaining time: <span id="timer">01:00</span> minutes</h3>
-    <button><span>join session</span></button>
-    <ul>
-      <li>umit.dincel <span>+10</span></li>
-      <li>akif.kahraman<span>+10</span></li>
-      <li>hasancan.yildir<span>+10</span></li>
-      <li>selim.sevencan<span>+10</span></li>
-      <li>davut.sala<span>+10</span></li>
+    <h2>session id: <span>#{{ session_id }}</span></h2>
+    <h3>remaining time: <div class="remaining-info"><span id="timer"></span> minutes</div></h3>
+
+    <form action="/join/{{ session_id }}">
+      <button id="join-session-btn" type="submit">
+        <span>join session</span>
+      </button>
+    </form>
+    <ul id="player-list">
+      {% for player in players %}
+       <li>{{ player }} <span>+10</span></li>
+      {% endfor %}
     </ul>
-    <h3>total player: <span>5</span></h3>
-    <h3>total bonus: <span>+50</span></h3>
+    <h3 id="total-player">total player: <span>{{ players|length }}</span></h3>
+    <h3 id="total-bonus">total bonus: <span>+{{ 10 * players|length }}</span></h3>
   </div>
 
   <div id="wheel">
@@ -32,12 +35,12 @@
   </div>
 
   <script type="text/javascript" src="/static/js/utils.js"></script>
-  <script type="text/javascript" src="/static/js/awheel.js"></script>
+  <script type="text/javascript" src="/static/js/Wheel.js"></script>
   <script type="text/javascript" src="/static/js/Timer.js"></script>
+  <script type="text/javascript" src="/static/js/Room.js"></script>
   <script type="text/javascript">
-    new Timer(
-      document.querySelector('#timer')
-    ).start(60);
+    var sessionID = "{{ session_id }}";
   </script>
+  <script type="text/javascript" src="/static/js/App.js"></script>
 </body>
 </html>

@@ -23,13 +23,28 @@ class DB(object):
         self.cur.execute(f"insert into {SESSION_DB} values ('{session_id}', '{timestamp}')")
         con.commit()
 
+    def get_session(self, session_id):
+        result = self.cur.execute(
+            f"select * from {SESSION_DB} "
+            f"where id=:session_id limit 1",
+            {'session_id': session_id}
+        )
+        return result.fetchone()
+
     def get_sessions(self):
         result = self.cur.execute(f"select * from {SESSION_DB}")
         return result.fetchall()
 
     def add_player(self, session_id, username):
-        self.cur.execute(f"insert into {PLAYER_DB} values ('{session_id}', '{username}')")
-        con.commit()
+        player = self.cur.execute(
+            f"select username from {PLAYER_DB} "
+            f"where session_id=:session_id and username=:username",
+            {'session_id': session_id, 'username': username}
+        )
+
+        if not player.fetchone():
+            self.cur.execute(f"insert into {PLAYER_DB} values ('{session_id}', '{username}')")
+            con.commit()
 
     def get_players(self):
         result = self.cur.execute(f"select * from {PLAYER_DB}")
@@ -40,7 +55,7 @@ class DB(object):
             f"select * from {PLAYER_DB} where session_id=:session_id",
             {'session_id': session_id}
         )
-        return [{'username': username} for _, username in result.fetchall()]
+        return [username for _, username in result.fetchall()]
 
 
 if __name__ == '__main__':

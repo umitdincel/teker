@@ -1,12 +1,14 @@
+import asyncio
+import json
 import os
 
-import shortuuid
-from sanic import Sanic
-from sanic.response import file, redirect, text, html
 from jinja2 import Environment, PackageLoader
+from sanic import Sanic
+from sanic.response import file, redirect, html
 
 from bonusly import Bonusly
 from db import DB
+from utils import get_session_id, get_session_remaining_time
 
 db = {}
 app = Sanic(__name__)
@@ -24,21 +26,24 @@ async def index(request):
 
 @app.route('/create-session', methods=['POST'])
 async def create_session(request):
-    session_id = shortuuid.uuid()
+    session_id = get_session_id()
     DB().create_session(session_id)
     return redirect(f'/join/{session_id}')
 
 
 @app.route('/join/<session_id>', methods=['GET', 'POST'])
 async def join_room(request, session_id):
+    template = env.get_template('templates/create-session.html')
+
     if request.method != 'POST':
-        return await file('static/templates/create-session.html')
+        return html(template.render())
 
     token = request.form.get('token')
     me = Bonusly(token).me()
 
     if not me['success']:
-        return await file('static/templates/create-session.html')
+        html_content = template.render(error=True)
+        return html(html_content)
     else:
         username = me['result']['username']
         DB().add_player(session_id, username)
@@ -48,22 +53,35 @@ async def join_room(request, session_id):
 
 @app.route('/room/<session_id>', methods=['GET'])
 async def room(request, session_id):
+    template = env.get_template('templates/spin.html')
+
+    session = DB().get_session(session_id)
+    if not session:
+        return redirect('/')
+
     players = DB().get_players_by_session_id(session_id)
 
-    template = env.get_template('templates/spin.html')
-    html_content = template.render(title='yucuk')
-    return html(html_content)
-    # return await file('static/templates/spin.html')
+    return html(
+        template.render(
+            players=players, session_id=session_id
+        )
+    )
 
 
-@app.websocket('/spin')
-async def feed(request, ws):
+@app.websocket('/spin/<session_id>')
+async def feed(request, ws, session_id):
     while True:
-        data = 'hello!'
-        print('Sending: ' + data)
-        await ws.send(data)
-        data = await ws.recv()
-        print('Received: ' + data)
+        players = DB().get_players_by_session_id(session_id)
+        session = DB().get_session(session_id)
+        _, created = session
+
+        data = {
+            'players': players,
+            'remaining_time': get_session_remaining_time(created)
+        }
+
+        await ws.send(json.dumps(data))
+        await asyncio.sleep(1)
 
 
 if __name__ == '__main__':

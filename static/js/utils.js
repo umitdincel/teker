@@ -17,8 +17,15 @@ function deg2rad(deg) {
   return deg * Math.PI/180;
 };
 
+// for testing
 function createPlayerList(n) {
   return Array.apply(null, Array(n)).map((_, i) => {
     return 'Player ' + (i+1);
   });
 };
+
+function createPlayers(n) {
+  return Array.apply(null, Array(n)).map((_, i) => {
+    return 'Player ' + (i+1);
+  });
+}

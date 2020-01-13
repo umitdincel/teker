@@ -12,9 +12,8 @@ class Bonusly(object):
 
     def request(self, path, method, body=None, _headers=None):
         headers = {
-            'Content-Type':'application/javascript'
+            'Content-Type': 'application/javascript'
         }
-
         if _headers:
             headers.update(headers)
 
@@ -23,7 +22,6 @@ class Bonusly(object):
         }
 
         url = urljoin(self.API, path)
-
         response = requests.request(
             url=url, method=method, params=params, 
             headers=headers, data=body
@@ -33,5 +31,8 @@ class Bonusly(object):
 
     def me(self):
         path = 'users/me'
-        
-        return self.request(path, method='GET')
+
+        from utils import get_session_id
+        username = get_session_id(12)
+        return {'success': True, 'result': {'username': username}}
+        # return self.request(path, method='GET')

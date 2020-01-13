@@ -13,6 +13,9 @@
       <div class="form-group">
         <input type="text" name="token" placeholder="token">
         <button><span>Enter &#9166;</span></button>
+        {% if error %}
+          <div class="error">Invalid token</div>
+        {% endif %}
       </div>
     </form>
   </div>

@@ -120,7 +120,7 @@ header h2 {
     width: 500px;
     border-radius: 1em;
     background: #140d28;
-    padding: 40px 20px;
+    padding: 40px 20px 30px;
 }
 
 #session-form h2 {
@@ -171,6 +171,14 @@ header h2 {
 
 #session-form .form-group button:hover span {
     text-shadow: 1px 1px 0px #fff;
+}
+
+#session-form .form-group .error {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    font-size: 10px;
+    color: lightcoral;
 }
 
 /*
@@ -234,6 +242,10 @@ header h2 {
 
 #room h3 span {
     color: cyan;
+}
+
+#room .remaining-info {
+    display: inline-block;
 }
 
 #room button {
